@@ -33,16 +33,16 @@ async function getObjetsAllManufactureLinks_() {
   if(DEBUG_MANUFACTURES.DEBUG_xml){
       Logger.log("document: " + document);
   }
-  var root = document.getRootElement();
-  var manufacturersElement = root.getChild('manufacturers');
-  var manufacturerElements = manufacturersElement.getChildren('manufacturer');
-  var manufacturerLinks = {};
+  let root = document.getRootElement();
+  let manufacturersElement = root.getChild('manufacturers');
+  let manufacturerElements = manufacturersElement.getChildren('manufacturer');
+  let manufacturerLinks = {};
 
-  for (var i = 0; i < manufacturerElements.length; i++) {
-    var manufacturer = manufacturerElements[i];
-    var id = manufacturer.getAttribute('id').getValue();
-    var xlinkNamespace = XmlService.getNamespace('xlink', 'http://www.w3.org/1999/xlink');
-    var href = manufacturer.getAttribute('href', xlinkNamespace).getValue();
+  for (let i = 0; i < manufacturerElements.length; i++) {
+    let manufacturer = manufacturerElements[i];
+    let id = manufacturer.getAttribute('id').getValue();
+    let xlinkNamespace = XmlService.getNamespace('xlink', 'http://www.w3.org/1999/xlink');
+    let href = manufacturer.getAttribute('href', xlinkNamespace).getValue();
     manufacturerLinks[id] = href;
   }
 
@@ -58,8 +58,8 @@ async function getObjetsAllManufactureLinks_() {
  *  @return {Array<string>} An array of manufacturer IDs
 */
 function getManufactureIds_(manufacturerLinks) {
-  var ids = [];
-  for (var id in manufacturerLinks) {
+  let ids = [];
+  for (let id in manufacturerLinks) {
     ids.push(id);
   }
   return ids;
@@ -74,8 +74,8 @@ function getManufactureIds_(manufacturerLinks) {
  *  @return {Array<string>} An array of manufacturer links
 */
 function getManufactureXlinks_(manufacturerLinks) {
-  var xlinks = [];
-  for (var id in manufacturerLinks) {
+  let xlinks = [];
+  for (let id in manufacturerLinks) {
     xlinks.push(manufacturerLinks[id]);
   }
   return xlinks;
@@ -90,8 +90,8 @@ function getManufactureXlinks_(manufacturerLinks) {
 async function getLanguageNameFromManufactureLink_(manufacturerLink) {
   const manufacturerContent = await getContentText_base64EncodedAuthorizationKey_(manufacturerLink, true);
   const document = XmlService.parse(manufacturerContent);
-  var root = document.getRootElement();
-  var manufacturerElement = root.getChild('manufacturer');
+  let root = document.getRootElement();
+  let manufacturerElement = root.getChild('manufacturer');
   return nameElement = manufacturerElement.getChild('name').getText();
 }
 
@@ -127,22 +127,22 @@ async function writeManufactureInfoToSheet() {
 
 */
 function createDropdownListManufactures_() {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sheet1 = ss.getSheetByName(CONFIG_Sheet.Name);
-  var columnGetDropDown = sheet1.getRange(CONFIG_Sheet.Manufactures_DropDown_Column_Cell).getValue()+1;
+  let ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet1 = ss.getSheetByName(CONFIG_Sheet.Name);
+  let columnGetDropDown = sheet1.getRange(CONFIG_Sheet.Manufactures_DropDown_Column_Cell).getValue()+1;
   if(DEBUG_MANUFACTURES.DEBUG_value){
     Logger.log("columnGetDropDown:"+ columnGetDropDown);
   }
-  var sheet2 = ss.getSheetByName(PRODUCTS_Sheet.Name);
-  var dataRange = sheet1.getRange(2, columnGetDropDown, sheet1.getLastRow() - 1);
-  var values = dataRange.getValues();
-  var flatValues = values.flat().filter(String); // Supprime les cellules vides
+  let sheet2 = ss.getSheetByName(PRODUCTS_Sheet.Name);
+  let dataRange = sheet1.getRange(2, columnGetDropDown, sheet1.getLastRow() - 1);
+  let values = dataRange.getValues();
+  let flatValues = values.flat().filter(String); // Supprime les cellules vides
   
-  var rule = SpreadsheetApp.newDataValidation()
+  let rule = SpreadsheetApp.newDataValidation()
     .requireValueInList(flatValues, true)
     .setAllowInvalid(false)
     .build();
 
-  var targetRange = sheet2.getRange(PRODUCTS_Sheet.Plage_product_manufacturer);
+  let targetRange = sheet2.getRange(PRODUCTS_Sheet.Plage_product_manufacturer);
   targetRange.setDataValidation(rule);
 }
