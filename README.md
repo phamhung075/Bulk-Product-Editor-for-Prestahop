@@ -12,7 +12,7 @@ I have created an API key for you on the PrestaShop web service. This key enable
 
 
 
-## Test environment on Google Sheets. 
+## Install environment on Google Sheets. 
 
 https://docs.google.com/spreadsheets/d/1iASz3aeBtZggfLrFEFqvOBlUZ2k5iXLIq58v6O6aiT0/edit
 On this spreadsheet, you have 3 sheets:
@@ -25,7 +25,7 @@ On this spreadsheet, you have 3 sheets:
 
 ----------------
 
-# TEST OPERATION:
+# OPERATION:
 
 1) Find the items you need to edit on sheet  `_FILTER_`
 
