@@ -5,10 +5,10 @@
 // This code is the intellectual property of Dai Hung PHAM. (daihung.pham@yahoo.fr)
 // Do not reuse or share this code without explicit permission.
 // If you wish to use or modify this code, please contact Dai Hung PHAM for authorization.
-var PREFIXES_REF = ["IPAD-", "TAB-","MACBOOK-Pro","MACBOOK-Air", "WATCH-"];
-var FNAC_REF_SUBFIXES = "fff15";
-var RAKUTEN_REF_SUBFIXES = "rrr11";
-var GET_SIZE = 5; //use on: get_RefPriceQty_byID() - prestashop_products_get.gs
+const PREFIXES_REF = ["IPAD-", "TAB-","MACBOOK-Pro","MACBOOK-Air", "WATCH-"];
+const FNAC_REF_SUBFIXES = "fff15";
+const RAKUTEN_REF_SUBFIXES = "rrr11";
+const GET_SIZE = 5; //use on: get_RefPriceQty_byID() - prestashop_products_get.gs
 
 
 const RAKUTENCSV = {
