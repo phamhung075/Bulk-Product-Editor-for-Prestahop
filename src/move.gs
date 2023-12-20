@@ -158,9 +158,9 @@ function myVLookup_(searchValue, sheetName, range, searchColumn, returnColumn) {
   if (DEBUG_MOVE.DEBUG_value) {
     Logger.log(`run myVLookup_`);
   }
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
-  var data = sheet.getRange(range).getValues();
-  for (var i = 0; i < data.length; i++) {
+  let sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
+  let data = sheet.getRange(range).getValues();
+  for (let i = 0; i < data.length; i++) {
     if (data[i][searchColumn - 1] == searchValue) {
       return data[i][returnColumn - 1];
     }
@@ -182,16 +182,16 @@ function createDropdownList_(dropDownList, sheetName, plage) {
   if (DEBUG_MOVE.DEBUG_value) {
     Logger.log(`run createDropdownList_`);
   }
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sheet = ss.getSheetByName(sheetName); // modify sheet name here
+  let ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet = ss.getSheetByName(sheetName); // modify sheet name here
 
   
-  var rule = SpreadsheetApp.newDataValidation()
+  let rule = SpreadsheetApp.newDataValidation()
     .requireValueInList(dropDownList) // modify drop-down list here
     .setAllowInvalid(false)
     .build();
 
-  var targetRange = sheet.getRange(plage); // modify range here
+  let targetRange = sheet.getRange(plage); // modify range here
   targetRange.setDataValidation(rule);
 }
 
