@@ -10,10 +10,10 @@
 
 */
 function onEdit(e) {
-  var range = e.range;
-  var column = range.getColumn();
-  var row = range.getRow();
-  var sheet = range.getSheet();
+  let range = e.range;
+  let column = range.getColumn();
+  let row = range.getRow();
+  let sheet = range.getSheet();
 
   // If the edit was made in column B (2nd column) and it's an empty cell
   if(column == 2 && sheet.getRange(row, column).getValue() == "") {
@@ -23,13 +23,13 @@ function onEdit(e) {
   
   // If the edit was made between column C (3rd) and column N (14th)
   if(column >= 3 && column <= 14) {
-    var cellQ = sheet.getRange(row, 17);
-    var prevValue = cellQ.getValue();
-    var cellRef = range.getA1Notation();
+    let cellQ = sheet.getRange(row, 17);
+    let prevValue = cellQ.getValue();
+    let cellRef = range.getA1Notation();
     
     // Check if the cell in column Q is empty or not
     if(prevValue != "") {
-      var cellRefs = prevValue.split(",");
+      let cellRefs = prevValue.split(",");
       if(cellRefs.indexOf(cellRef) == -1) {
         cellQ.setValue(prevValue + ',' + cellRef); // append the edited cell reference only if it's not already recorded
       }
