@@ -20,7 +20,6 @@ On this spreadsheet, you have 3 sheets:
 `_PRODUCTS_`
 `_FILTER_`
 
-(I have configured this for the test environment.)
 
 
 ----------------
