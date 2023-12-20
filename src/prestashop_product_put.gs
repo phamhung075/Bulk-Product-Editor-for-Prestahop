@@ -63,7 +63,7 @@ const getDataLigne_ = () => {
 function extractNumber_(data) {
   const result = getMatch_(/\((\d+)\)/, data);
   if (result) {
-    var number = parseInt(result[1]);
+    let number = parseInt(result[1]);
     if (DEBUG_PRODUCT_PUT.DEBUG_value) {
       Logger.log(`extractNumber_() return number(int): ${number}`);
     }
@@ -2048,11 +2048,11 @@ async function putProductID_API_ALL() {
  * @return {Array} The compiled array of values from the spreadsheet.
 */
 function compileData_() {
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(PRODUCTS_Sheet.Name);
-  var range = sheet.getRange('Q2:Q');
-  var values = range.getValues();
+  let sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(PRODUCTS_Sheet.Name);
+  let range = sheet.getRange('Q2:Q');
+  let values = range.getValues();
 
-  var resultArray = values.filter(value => value[0] !== '' && typeof value[0] === 'string') 
+  let resultArray = values.filter(value => value[0] !== '' && typeof value[0] === 'string') 
                          .map(value => value[0].split(','))
                          .flat();
 
