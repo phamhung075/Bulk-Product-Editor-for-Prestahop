@@ -10,9 +10,9 @@
 
 */
 function getColumnLetter_(columnNumber) {
-  var columnLetter = "";
+  let columnLetter = "";
   while (columnNumber > 0) {
-    var remainder = (columnNumber - 1) % 26;
+    let remainder = (columnNumber - 1) % 26;
     columnLetter = String.fromCharCode(65 + remainder) + columnLetter;
     columnNumber = Math.floor((columnNumber - 1) / 26);
   }
@@ -25,8 +25,8 @@ function getColumnLetter_(columnNumber) {
 
 */
 function getColumnNumber_(columnLetter) {
-  var column = 0;
-  for (var i = 0; i < columnLetter.length; i++) {
+  let column = 0;
+  for (let i = 0; i < columnLetter.length; i++) {
     column *= 26;
     column += columnLetter.charCodeAt(i) - 'A'.charCodeAt(0) + 1;
   }
@@ -39,11 +39,11 @@ function getColumnNumber_(columnLetter) {
 
 */
 function getIdProductbycellReference_(cellReference) {
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(PRODUCTS_Sheet.Name);
-  var columnLetter = cellReference.charAt(0);
-  var row = parseInt(cellReference.substring(1));
-  var cell = sheet.getRange(row, 2);
-  var idProduct = cell.getValue();
+  let sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(PRODUCTS_Sheet.Name);
+  let columnLetter = cellReference.charAt(0);
+  let row = parseInt(cellReference.substring(1));
+  let cell = sheet.getRange(row, 2);
+  let idProduct = cell.getValue();
   return idProduct;
 }
 
@@ -67,13 +67,13 @@ updateProductEAN13_
 
 */
 function translateCellReference_(cellReference) {
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(PRODUCTS_Sheet.Name);
-  var putData = sheet.getRange(cellReference).getValue();
-  var columnNames = [
+  let sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(PRODUCTS_Sheet.Name);
+  let putData = sheet.getRange(cellReference).getValue();
+  let columnNames = [
     "Reference", "Quantite", "Prix HT", "Nom", "Categories", "Condition", "Active",
     "EAN13", "Description court", "Description long", "Marque", "id tax rules group"
   ];
-  var functionNames = [
+  let functionNames = [
     /*"updateProductReference_",
     "updateProductQty_",
     "updateProductPrice_",
@@ -101,13 +101,13 @@ function translateCellReference_(cellReference) {
     "putIdtaxRulesGroup_"
   ];
   
-  var match = cellReference.match(/([A-Z]+)(\d+)/);
+  let match = cellReference.match(/([A-Z]+)(\d+)/);
   if (match) {
-    var columnLetter = match[1];
-    var rowIndex = parseInt(match[2]);
-    var columnIndex = columnLetter.charCodeAt(0) - 65 + 1;
-    var columnName = columnNames[columnIndex - 3];
-    var functionName = functionNames[columnIndex - 3]
+    let columnLetter = match[1];
+    let rowIndex = parseInt(match[2]);
+    let columnIndex = columnLetter.charCodeAt(0) - 65 + 1;
+    let columnName = columnNames[columnIndex - 3];
+    let functionName = functionNames[columnIndex - 3]
     return {
       idProduct: getIdProductbycellReference_(cellReference),
       nameColumn: columnName,
@@ -145,7 +145,7 @@ function testT1(){
 
   // Example usage:
 
-  var translation = translateCellReference("E4");
+  let translation = translateCellReference("E4");
   Logger.log(translation);
 
   putData = translateCellReference("F2");
@@ -155,10 +155,10 @@ function testT1(){
   Logger.log(translation);
   // Example usage:
   // Example usage:
-  var functionName = "functionName2";
-  var parameter1 = "Hello";
-  var parameter2 = "World!";
-  var parameter3 = 123;
+  let functionName = "functionName2";
+  let parameter1 = "Hello";
+  let parameter2 = "World!";
+  let parameter3 = 123;
   callFunctionByName(functionName, parameter1, parameter2, parameter3);
 
 }
@@ -174,27 +174,27 @@ function functionName2(a, b, c) {
 //test2////////////////////////////////////////////////////////////////////////////////////
 
 function test2() {
-var str = "E2, D3, F3, I3, H5, F5";
-var result = removeElement(str, 'E2');
+let str = "E2, D3, F3, I3, H5, F5";
+let result = removeElement(str, 'E2');
 Logger.log(result); // Logs: "D3, F3, I3, H5, F5"
 
-var str = "E2";
-var result = removeElement(str, 'E2');
-Logger.log(result); // Logs: "D3, F3, I3, H5, F5"
-
-
-var str = "E2, D3";
-var result = removeElement(str, 'E2');
+let str = "E2";
+let result = removeElement(str, 'E2');
 Logger.log(result); // Logs: "D3, F3, I3, H5, F5"
 
 
-var str = "E2, D3, F3, I3, H5, F5";
-var result = removeElement(str, 'D3');
+let str = "E2, D3";
+let result = removeElement(str, 'E2');
 Logger.log(result); // Logs: "D3, F3, I3, H5, F5"
 
 
-var str = "E2, D3, F3, I3, H5, F5";
-var result = removeElement(str, 'F9');
+let str = "E2, D3, F3, I3, H5, F5";
+let result = removeElement(str, 'D3');
+Logger.log(result); // Logs: "D3, F3, I3, H5, F5"
+
+
+let str = "E2, D3, F3, I3, H5, F5";
+let result = removeElement(str, 'F9');
 Logger.log(result); // Logs: "D3, F3, I3, H5, F5"
 }
 
