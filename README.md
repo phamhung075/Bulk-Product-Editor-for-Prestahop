@@ -1,4 +1,4 @@
-Hello, this guide explains how to use the **Bulk Product Editor extension for PrestaShop**  (old name is Sync Products data Google Sheet Prestahop (327186511080). This extension operates through Google Sheets, and its main purpose is to synchronize product information between Google Sheets and PrestaShop.
+Hello, this guide explains how to use the **Bulk Product Editor extension for PrestaShop** . This extension operates through Google Sheets, and its main purpose is to synchronize product information between Google Sheets and PrestaShop.
 https://daihungpham.tech/?page_id=160
 
 ## Test environment on Prestashop
