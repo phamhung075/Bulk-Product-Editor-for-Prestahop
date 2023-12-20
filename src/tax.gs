@@ -33,16 +33,16 @@ async function getObjetsAllTaxLinks_() {
   if(DEBUG_TAXS.DEBUG_xml){
       Logger.log("document: " + document);
   }
-  var root = document.getRootElement();
-  var taxsElement = root.getChild('tax_rule_groups');
-  var taxElements = taxsElement.getChildren('tax_rule_group');
-  var taxLinks = {};
+  let root = document.getRootElement();
+  let taxsElement = root.getChild('tax_rule_groups');
+  let taxElements = taxsElement.getChildren('tax_rule_group');
+  let taxLinks = {};
 
-  for (var i = 0; i < taxElements.length; i++) {
-    var tax = taxElements[i];
-    var id = tax.getAttribute('id').getValue();
-    var xlinkNamespace = XmlService.getNamespace('xlink', 'http://www.w3.org/1999/xlink');
-    var href = tax.getAttribute('href', xlinkNamespace).getValue();
+  for (let i = 0; i < taxElements.length; i++) {
+    let tax = taxElements[i];
+    let id = tax.getAttribute('id').getValue();
+    let xlinkNamespace = XmlService.getNamespace('xlink', 'http://www.w3.org/1999/xlink');
+    let href = tax.getAttribute('href', xlinkNamespace).getValue();
     taxLinks[id] = href;
   }
 
@@ -58,8 +58,8 @@ async function getObjetsAllTaxLinks_() {
  *  @return {Array<string>} An array of tax IDs
 */
 function getTaxIds_(taxLinks) {
-  var ids = [];
-  for (var id in taxLinks) {
+  let ids = [];
+  for (let id in taxLinks) {
     ids.push(id);
   }
   return ids;
@@ -74,8 +74,8 @@ function getTaxIds_(taxLinks) {
  *  @return {Array<string>} An array of tax links
 */
 function getTaxXlinks_(taxLinks) {
-  var xlinks = [];
-  for (var id in taxLinks) {
+  let xlinks = [];
+  for (let id in taxLinks) {
     xlinks.push(taxLinks[id]);
   }
   return xlinks;
@@ -90,8 +90,8 @@ function getTaxXlinks_(taxLinks) {
 async function getLanguageNameFromTaxLink_(taxLink) {
   const taxContent = await getContentText_base64EncodedAuthorizationKey_(taxLink, true);
   const document = XmlService.parse(taxContent);
-  var root = document.getRootElement();
-  var taxElement = root.getChild('tax_rule_group');
+  let root = document.getRootElement();
+  let taxElement = root.getChild('tax_rule_group');
   return nameElement = taxElement.getChild('name').getText();
 }
 
@@ -128,22 +128,22 @@ async function writeTaxInfoToSheet() {
 
 */
 function createDropdownListTaxs_() {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sheet1 = ss.getSheetByName(CONFIG_Sheet.Name);
-  var columnGetDropDown = sheet1.getRange(CONFIG_Sheet.Taxs_DropDown_Column_Cell).getValue()+1;
+  let ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet1 = ss.getSheetByName(CONFIG_Sheet.Name);
+  let columnGetDropDown = sheet1.getRange(CONFIG_Sheet.Taxs_DropDown_Column_Cell).getValue()+1;
   if(DEBUG_TAXS.DEBUG_value){
     Logger.log("columnGetDropDown:"+ columnGetDropDown);
   }
-  var sheet2 = ss.getSheetByName(PRODUCTS_Sheet.Name);
-  var dataRange = sheet1.getRange(2, columnGetDropDown, sheet1.getLastRow() - 1);
-  var values = dataRange.getValues();
-  var flatValues = values.flat().filter(String); // Supprime les cellules vides
+  let sheet2 = ss.getSheetByName(PRODUCTS_Sheet.Name);
+  let dataRange = sheet1.getRange(2, columnGetDropDown, sheet1.getLastRow() - 1);
+  let values = dataRange.getValues();
+  let flatValues = values.flat().filter(String); // Supprime les cellules vides
   
-  var rule = SpreadsheetApp.newDataValidation()
+  let rule = SpreadsheetApp.newDataValidation()
     .requireValueInList(flatValues, true)
     .setAllowInvalid(false)
     .build();
 
-  var targetRange = sheet2.getRange(PRODUCTS_Sheet.Plage_product_id_tax_rules_group);
+  let targetRange = sheet2.getRange(PRODUCTS_Sheet.Plage_product_id_tax_rules_group);
   targetRange.setDataValidation(rule);
 }
