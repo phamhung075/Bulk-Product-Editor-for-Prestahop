@@ -28,16 +28,16 @@ async function getObjetsAllCountryLinks_() {
   const url = getlinkCountriesIDsAPI_();
   const countriesContent = await getContentText_base64EncodedAuthorizationKey_(url, true);
   const document = XmlService.parse(countriesContent);
-  var root = document.getRootElement();
-  var countriesElement = root.getChild('countries');
-  var countryElements = countriesElement.getChildren('country');
-  var countryLinks = {};
+  let root = document.getRootElement();
+  let countriesElement = root.getChild('countries');
+  let countryElements = countriesElement.getChildren('country');
+  let countryLinks = {};
 
-  for (var i = 0; i < countryElements.length; i++) {
-    var country = countryElements[i];
-    var id = country.getAttribute('id').getValue();
-    var xlinkNamespace = XmlService.getNamespace('xlink', 'http://www.w3.org/1999/xlink');
-    var href = country.getAttribute('href', xlinkNamespace).getValue();
+  for (let i = 0; i < countryElements.length; i++) {
+    let country = countryElements[i];
+    let id = country.getAttribute('id').getValue();
+    let xlinkNamespace = XmlService.getNamespace('xlink', 'http://www.w3.org/1999/xlink');
+    let href = country.getAttribute('href', xlinkNamespace).getValue();
     countryLinks[id] = href;
   }
 
@@ -53,8 +53,8 @@ async function getObjetsAllCountryLinks_() {
  *  @return {Array<string>} An array of country IDs
 */
 function getCountryIds_(countryLinks) {
-  var ids = [];
-  for (var id in countryLinks) {
+  let ids = [];
+  for (let id in countryLinks) {
     ids.push(id);
   }
   return ids;
@@ -69,8 +69,8 @@ function getCountryIds_(countryLinks) {
  *  @return {Array<string>} An array of country links
 */
 function getCountryXlinks_(countryLinks) {
-  var xlinks = [];
-  for (var id in countryLinks) {
+  let xlinks = [];
+  for (let id in countryLinks) {
     xlinks.push(countryLinks[id]);
   }
   return xlinks;
@@ -85,10 +85,10 @@ function getCountryXlinks_(countryLinks) {
 async function getLanguageNameFromCountryLink_(countryLink) {
   const countryContent = await getContentText_base64EncodedAuthorizationKey_(countryLink, true);
   const document = XmlService.parse(countryContent);
-  var root = document.getRootElement();
-  var countryElement = root.getChild('country');
-  var nameElement = countryElement.getChild('name');
-  var languageElements = nameElement.getChildren('language');
+  let root = document.getRootElement();
+  let countryElement = root.getChild('country');
+  let nameElement = countryElement.getChild('name');
+  let languageElements = nameElement.getChildren('language');
   
   // Assuming there's only one language element, return the language name
   if (languageElements.length > 0) {
