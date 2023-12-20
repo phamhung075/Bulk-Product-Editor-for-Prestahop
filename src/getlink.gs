@@ -17,7 +17,7 @@ const DEBUG_GETLINK = {
  *  @return {string} The API link for the product with the given ID
 */
 function showAlert(alert) {
-  var ui = SpreadsheetApp.getUi();
+  let ui = SpreadsheetApp.getUi();
   ui.alert('Alert', alert, ui.ButtonSet.OK);
 }
 function getDataFromApi_(method) {
